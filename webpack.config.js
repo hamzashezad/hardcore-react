@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const CopyPath = require('copy-webpack-plugin');
 
 module.exports = {
 	entry: './src/react/index.js',
@@ -31,6 +32,19 @@ module.exports = {
 			}
 		]
 	},
+	plugins: [
+		new CopyPath({
+			patterns: [
+				{
+					from: path.resolve(__dirname, 'src/react/index.html'),
+					to: path.resolve(__dirname, 'public/react')
+				}
+			],
+			options: {
+				concurrency: 100
+			}
+		})
+	],
 	resolve: {
 		extensions: [
 			'*', '.js', '.jsx'
